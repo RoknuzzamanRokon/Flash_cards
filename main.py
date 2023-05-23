@@ -1,6 +1,18 @@
 from tkinter import *
+import pandas
+import random
+
 
 BACKGROUND_COLOR = "#B1DDC6"
+
+# read csv file here and oriented there data.
+data = pandas.read_csv("data/english_words.csv")
+create_dict = data.to_dict(orient="records")
+
+
+# create a function kye.
+
+
 
 window = Tk()
 window.title("Flash card")
