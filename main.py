@@ -18,7 +18,15 @@ canvas.config(width=800, height=526, bg=BACKGROUND_COLOR, highlightthickness=0)
 canvas.create_image(400, 263, image=import_back_image)
 canvas.create_text(400,100,text="Title", font=("Arial", 30, "normal"))
 canvas.create_text(400,300,text="Word", font=("Arial", 60, "bold"))
-canvas.grid(row=0, column=0)
+canvas.grid(row=0, column=0, columnspan=2)
 
+# Create a Button.
+yes_button = Button()
+yes_button.config(image=import_right_image,highlightthickness=1,bg="red")
+yes_button.grid(row=1,column=0)
+
+no_button = Button()
+no_button.config(image=import_wrong_image,highlightthickness=1, bg="red")
+no_button.grid(row=1,column=1)
 
 window.mainloop()
