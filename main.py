@@ -11,7 +11,9 @@ create_dict = data.to_dict(orient="records")
 
 
 # create a function kye.
-
+def function_key():
+    word = random.choice(create_dict)
+    new_data = word["English"]
 
 
 window = Tk()
