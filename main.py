@@ -8,7 +8,8 @@ current_card = {}
 
 # read csv file here and oriented there data.
 data = pandas.read_csv("data/english_words-Sheet_02.csv")
-to_leran = data.to_dict(orient="records")
+to_learn = data.to_dict(orient="records")
+
 
 
 # create a function kye.
@@ -16,7 +17,7 @@ def next_card():
     global current_card
     global flip_timer
     window.after_cancel(flip_timer)
-    current_card = random.choice(to_leran)
+    current_card = random.choice(to_learn)
     new_data = current_card["English"]
     canvas.itemconfig(canvas_text, text="English")
     canvas.itemconfig(canvas_word, text=new_data)
@@ -26,7 +27,11 @@ def next_card():
 
 
 def is_known():
-    to_leran.remove(current_card)
+    to_learn.remove(current_card)
+    data = pandas.DataFrame(to_learn)
+    data.to_csv("data/word_to_learn.csv")
+
+    print(len(to_learn))
     next_card()
 
 
