@@ -46,8 +46,8 @@ def seen_key():
 
 
 def flip_card():
-    new_data = current_card["Bangla"]
-    canvas.itemconfig(canvas_text, text="Bangla")
+    new_data = current_card["English"]
+    canvas.itemconfig(canvas_text, text="English")
     canvas.itemconfig(canvas_word, text=new_data)
     canvas.itemconfig(crate_img, image=import_back_image)
 
