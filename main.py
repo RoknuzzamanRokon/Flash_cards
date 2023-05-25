@@ -4,6 +4,7 @@ import random
 
 
 BACKGROUND_COLOR = "#B1DDC6"
+word = {}
 
 # read csv file here and oriented there data.
 data = pandas.read_csv("data/english_words-Sheet_02.csv")
@@ -12,11 +13,15 @@ create_dict = data.to_dict(orient="records")
 
 # create a function kye.
 def function_key():
+    global word
     word = random.choice(create_dict)
     new_data = word["English"]
-    bangla_word_data = word["Bangla"]
     canvas.itemconfig(canvas_text, text="English")
     canvas.itemconfig(canvas_word, text=new_data)
+
+
+def seen_key():
+    bangla_word_data = word["Bangla"]
     canvas.itemconfig(bangla_word, text=bangla_word_data)
 
 
@@ -49,7 +54,7 @@ no_button.config(image=import_wrong_image, highlightthickness=1, bg="red", comma
 no_button.grid(row=1, column=1)
 
 see_button = Button()
-see_button.config(text="Seen", highlightthickness=1, fg="Green", font=("Arial", 10, "bold"), command=function_key)
+see_button.config(text="Seen", highlightthickness=1, fg="Green", font=("Arial", 10, "bold"), command=seen_key)
 see_button.place(x=0, y=430)
 
 
