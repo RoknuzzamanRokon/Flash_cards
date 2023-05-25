@@ -7,9 +7,8 @@ BACKGROUND_COLOR = "#B1DDC6"
 current_card = {}
 
 # read csv file here and oriented there data.
-data = pandas.read_csv("data/english_words-Sheet_02.csv")
+data = pandas.read_csv("data/word_to_learn.csv")
 to_learn = data.to_dict(orient="records")
-
 
 
 # create a function kye.
