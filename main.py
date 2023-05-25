@@ -4,20 +4,20 @@ import random
 
 
 BACKGROUND_COLOR = "#B1DDC6"
-word = {}
+current_card = {}
 
 # read csv file here and oriented there data.
 data = pandas.read_csv("data/english_words-Sheet_02.csv")
-create_dict = data.to_dict(orient="records")
+to_leran = data.to_dict(orient="records")
 
 
 # create a function kye.
-def function_key():
-    global word
+def next_card():
+    global current_card
     global flip_timer
     window.after_cancel(flip_timer)
-    word = random.choice(create_dict)
-    new_data = word["English"]
+    current_card = random.choice(to_leran)
+    new_data = current_card["English"]
     canvas.itemconfig(canvas_text, text="English")
     canvas.itemconfig(canvas_word, text=new_data)
     canvas.itemconfig(bangla_word, text="****")
@@ -25,13 +25,18 @@ def function_key():
     flip_timer = window.after(3000, func=flip_card)
 
 
+def is_known():
+    to_leran.remove(current_card)
+    next_card()
+
+
 def seen_key():
-    bangla_word_data = word["Bangla"]
+    bangla_word_data = current_card["Bangla"]
     canvas.itemconfig(bangla_word, text=bangla_word_data)
 
 
 def flip_card():
-    new_data = word["Bangla"]
+    new_data = current_card["Bangla"]
     canvas.itemconfig(canvas_text, text="Bangla")
     canvas.itemconfig(canvas_word, text=new_data)
     canvas.itemconfig(crate_img, image=import_back_image)
@@ -61,11 +66,11 @@ canvas.grid(row=0, column=0, columnspan=2)
 
 # Create a Button.
 yes_button = Button()
-yes_button.config(image=import_right_image, highlightthickness=1, bg="red", command=function_key)
+yes_button.config(image=import_right_image, highlightthickness=1, bg="red", command=is_known)
 yes_button.grid(row=1, column=0)
 
 no_button = Button()
-no_button.config(image=import_wrong_image, highlightthickness=1, bg="red", command=function_key)
+no_button.config(image=import_wrong_image, highlightthickness=1, bg="red", command=next_card)
 no_button.grid(row=1, column=1)
 
 see_button = Button()
@@ -73,7 +78,7 @@ see_button.config(text="Seen", highlightthickness=1, fg="Green", font=("Arial", 
 see_button.place(x=0, y=430)
 
 
-function_key()
+next_card()
 
 
 window.mainloop()
