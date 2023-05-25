@@ -14,10 +14,15 @@ create_dict = data.to_dict(orient="records")
 # create a function kye.
 def function_key():
     global word
+    global flip_timer
+    window.after_cancel(flip_timer)
     word = random.choice(create_dict)
     new_data = word["English"]
     canvas.itemconfig(canvas_text, text="English")
     canvas.itemconfig(canvas_word, text=new_data)
+    canvas.itemconfig(bangla_word, text="****")
+    canvas.itemconfig(crate_img, image=import_front_image)
+    flip_timer = window.after(3000, func=flip_card)
 
 
 def seen_key():
@@ -25,10 +30,18 @@ def seen_key():
     canvas.itemconfig(bangla_word, text=bangla_word_data)
 
 
+def flip_card():
+    new_data = word["Bangla"]
+    canvas.itemconfig(canvas_text, text="Bangla")
+    canvas.itemconfig(canvas_word, text=new_data)
+    canvas.itemconfig(crate_img, image=import_back_image)
+
+
 window = Tk()
 window.title("Flash card")
 window.config(pady=50, padx=50, bg=BACKGROUND_COLOR)
 
+flip_timer = window.after(3000, func=flip_card)
 
 import_front_image = PhotoImage(file="./images/card_front.png")
 import_back_image = PhotoImage(file="./images/card_back.png")
@@ -38,10 +51,12 @@ import_wrong_image = PhotoImage(file="./images/wrong.png")
 # Create a canvas for image.
 canvas = Canvas()
 canvas.config(width=800, height=526, bg=BACKGROUND_COLOR, highlightthickness=0)
-canvas.create_image(400, 263, image=import_back_image)
+crate_img = canvas.create_image(400, 263, image=import_front_image)
+
 canvas_text = canvas.create_text(400, 100, text="", font=("Arial", 30, "normal"))
 canvas_word = canvas.create_text(400, 270, text="", font=("Arial", 60, "bold"))
-bangla_word = canvas.create_text(400, 410, text="Word", font=("Arial", 40, "bold"), fill="Green")
+bangla_word = canvas.create_text(400, 420, text="Word", font=("Arial", 20, "bold"), fill="Green")
+
 canvas.grid(row=0, column=0, columnspan=2)
 
 # Create a Button.
