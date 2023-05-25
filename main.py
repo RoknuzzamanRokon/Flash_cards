@@ -5,10 +5,16 @@ import random
 
 BACKGROUND_COLOR = "#B1DDC6"
 current_card = {}
+to_learn = {}
 
 # read csv file here and oriented there data.
-data = pandas.read_csv("data/word_to_learn.csv")
-to_learn = data.to_dict(orient="records")
+try:
+    data = pandas.read_csv("data/word_to_learn.csv")
+except FileNotFoundError:
+    original_data = pandas.read_csv("data/english_words-Sheet_02.csv")
+    to_learn = original_data.to_dict(orient="records")
+else:
+    to_learn = data.to_dict(orient="records")
 
 
 # create a function kye.
@@ -28,7 +34,7 @@ def next_card():
 def is_known():
     to_learn.remove(current_card)
     data = pandas.DataFrame(to_learn)
-    data.to_csv("data/word_to_learn.csv")
+    data.to_csv("data/word_to_learn.csv", index=False)
 
     print(len(to_learn))
     next_card()
