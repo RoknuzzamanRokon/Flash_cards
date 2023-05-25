@@ -26,7 +26,7 @@ def next_card():
     new_data = current_card["English"]
     canvas.itemconfig(canvas_text, text="English")
     canvas.itemconfig(canvas_word, text=new_data)
-    # canvas.itemconfig(bangla_word, text="****")
+    canvas.itemconfig(bangla_word, text="****")
     canvas.itemconfig(crate_img, image=import_front_image)
     flip_timer = window.after(3000, func=flip_card)
 
@@ -71,7 +71,7 @@ crate_img = canvas.create_image(400, 263, image=import_front_image)
 canvas_text = canvas.create_text(400, 100, text="", font=("Arial", 30, "normal"))
 canvas_word = canvas.create_text(400, 270, text="", font=("Arial", 60, "bold"))
 
-# bangla_word = canvas.create_text(400, 420, text="Word", font=("Arial", 20, "bold"), fill="Green")
+bangla_word = canvas.create_text(400, 420, text="Word", font=("Arial", 20, "bold"), fill="Green")
 
 canvas.grid(row=0, column=0, columnspan=2)
 
@@ -84,9 +84,9 @@ no_button = Button()
 no_button.config(image=import_wrong_image, highlightthickness=1, bg="red", command=next_card)
 no_button.grid(row=1, column=1)
 
-# see_button = Button()
-# see_button.config(text="Seen", highlightthickness=1, fg="Green", font=("Arial", 10, "bold"), command=seen_key)
-# see_button.place(x=0, y=430)
+see_button = Button()
+see_button.config(text="Seen", highlightthickness=1, fg="Green", font=("Arial", 10, "bold"), command=seen_key)
+see_button.place(x=0, y=430)
 
 
 next_card()
